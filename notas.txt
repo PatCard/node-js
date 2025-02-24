@@ -1,0 +1,93 @@
+
+METODO 1: Montar el código fuente con -v
+###
+app.js
+function holaMundo() {
+    console.log("Hola mundo actualizado!");
+}
+holaMundo();
+
+###
+sudo docker run --rm -v $(pwd):/app -w /app node:18-alpine node app.js
+Explicación:
+
+-v $(pwd):/app → Monta el directorio actual dentro del contenedor.
+-w /app → Establece /app como el directorio de trabajo en el contenedor.
+node app.js → Ejecuta el archivo dentro del contenedor.
+
+###
+patricio@patricio-Vivobook-ASUSLaptop-X3500PCB-K3500PC:~/d_nod/hw$ sudo docker run --rm -v $(pwd):/app -w /app node:18-alpine node app.js
+Hola mundo actualizado!
+
+METODO 2: Usar docker-compose para desarrollo
+###
+Paso 1: Crear un docker-compose.yml
+
+version: '3'
+services:
+  node:
+    image: node:18-alpine
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: node app.js
+
+Paso 2: Ejecutar con docker-compose
+sudo docker-compose up
+
+Cada vez que hagas cambios en app.js, solo necesitas guardar el archivo y reiniciar el servicio:
+
+docker-compose restart
+
+
+METODO 3: Ejecutar nodemon sin instalarlo en la máquina
+
+sudo docker run --rm -v $(pwd):/app -w /app node:18-alpine sh -c "npm install -g nodemon && nodemon app.js"
+
+
+METODO 4: Instalar nodemon dentro del contenedor (sin modificar el proyecto)
+sudo docker run --rm -v $(pwd):/app -w /app node:18-alpine sh -c "npm install -g nodemon && nodemon app.js"
+
+METODO 5: Instalar nodemon en el contenedor de forma permanente
+
+1. Crea un Dockerfile con nodemon
+
+FROM node:18-alpine
+WORKDIR /app
+COPY . . 
+RUN npm install
+RUN npm install -g nodemon
+COPY . .
+CMD ["nodemon", "app.js"]
+
+2. Construye la imagen
+
+agregar 
+package.json :
+{
+    "name": "mi-node-app",
+    "version": "1.0.0",
+    "description": "Una app de ejemplo con Node.js y Docker",
+    "main": "app.js",
+    "scripts": {
+      "start": "node app.js",
+      "dev": "nodemon app.js"
+    },
+    "author": "Tu nombre",
+    "license": "MIT",
+    "dependencies": {},
+    "devDependencies": {
+      "nodemon": "^2.0.0"
+    }
+  }
+  
+sudo docker build -t mi-node-app .
+
+3. Ejecuta el contenedor
+
+
+sudo docker run --rm -v $(pwd):/app -w /app mi-node-app
+
+
+------------------------------------------------
+git init
