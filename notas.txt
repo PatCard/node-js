@@ -119,4 +119,4 @@ git add .
 
 git commit -m "Agrego nueva info a notas.txt"
 
-git pull origin main
+git push origin main
