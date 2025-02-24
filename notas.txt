@@ -91,3 +91,23 @@ sudo docker run --rm -v $(pwd):/app -w /app mi-node-app
 
 ------------------------------------------------
 git init
+
+git add .
+
+git config --global user.name "Patricio Cardenas"
+
+git config --global user.email "mi@email.com"
+
+Verificar con:
+git config --global user.name
+git config --global user.email
+
+git commit -m "Inicialización de proyectos Node.js"
+
+git remote add origin https://github.com/PatCard/node-js.git
+
+git remote -v
+
+git branch -m master main
+
+git push --force origin main
