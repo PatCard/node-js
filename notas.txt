@@ -111,3 +111,12 @@ git remote -v
 git branch -m master main
 
 git push --force origin main
+
+Para futuros cambios:
+git status
+
+git add .
+
+git commit -m "Agrego nueva info a notas.txt"
+
+git pull origin main
