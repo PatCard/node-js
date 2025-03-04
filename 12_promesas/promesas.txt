@@ -1,0 +1,46 @@
+// Promesa
+
+// Objeto que representa el eventual
+// resultado (o error) de una operación
+// asíncrona.
+
+// Promesa
+// Una promesa es un objeto que representa el eventual resultado (o error) de una operación asíncrona. 
+// El estado de una promesa puede cambiar a lo largo del tiempo, y se puede representar mediante los siguientes 
+// estados:
+
+// Pendiente (Pending) : Este es el estado inicial de una promesa. En este estado, la operación aún no ha 
+// terminado y la promesa está esperando el resultado.
+// Cumplida (Fulfilled) : Si la operación se completa con éxito, la promesa cambia a este estado. Cuando 
+// una promesa está cumplida, se asocia con un valor resultante que representa el resultado de la operación exitosa.
+// Rechazada (Rejected) : Si la operación falla o produce un error, la promesa cambia a este estado. Cuando 
+// una promesa está rechazada, se asocia con un motivo de rechazo que representa el error o la razón por la cual la operación falló.
+
+//            +-------------------+
+//            |     Promesa       |
+//            +-------------------+
+//                    |
+//                    v
+//            +-------------------+
+//            |    Pendiente      |
+//            |   (pending)       |
+//            +-------------------+
+//                /           \
+//               /             \
+//              /               \
+//             v                 v
+// +-------------------+    +-------------------+
+// |    Cumplida       |    |    Rechazada      |
+// |   (fulfilled)     |    |   (rejected)      |
+// +-------------------+    +-------------------+
+
+// Función callback
+
+// Función que se pasa a otra función
+// como argumento y luego se ejecuta
+// dentro de la función externa.
+
+Las promesas tienen un método
+.then(), con el cual podemos decidir
+qué ocurre cuando se completa la
+promesa (éxito o error).
